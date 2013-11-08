@@ -11,10 +11,12 @@ The purpose of this is to investigate an alternative method of handling md5 chec
 The benchmark test takes a list of 10000 md5 checksums and does a linear search for the final element thus performing 10000 comparison operations.
 
 The results on my i5 Gentoo laptop were as follows:
+
     10,000 string comparisons --  195 µseconds
     10,000 uint128 comparisons -- 1 µsecond 
     
 However, converting the 10000 strings into uint128s took
+
     2896 µseconds
 
 This overhead is mostly due to a memcpy inside the create_uint128 function. This means that the conversion operation takes 15 times as long as a string comparison.
